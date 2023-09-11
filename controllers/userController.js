@@ -32,6 +32,15 @@ const userCtrl = {
         } catch (error) {
             next({ stack: error })
         }
+    },
+    async getUser({ user }, res, next) {
+        try {
+            const currUser = await userModel.findOne({ _id: user._id })
+            currUser.password = "****"
+            res.status(200).json(currUser)
+        } catch (error) {
+            next({ stack: error })
+        }
     }
 
 }
